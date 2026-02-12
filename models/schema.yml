@@ -39,6 +39,47 @@ sources:
               - unique
               - not_null
 
+      - name: adwords #Alias
+        identifier: raw_gz_adwords
+        description: adwords campaign
+        columns:
+          - name: "(date_date || '-' || campaign_key)"
+            description: primary key of the table
+            tests:
+              - unique
+              - not_null
+          
+
+      - name: bing #Alias
+        identifier: raw_gz_bing
+        description: bing campaign
+        columns:
+          - name: "(date_date || '-' || campaign_key)"
+            description: primary key of the table
+            tests:
+              - unique
+              - not_null
+
+      - name: criteo #Alias
+        identifier: raw_gz_criteo
+        description: criteo campaign
+        columns:
+          - name: "(date_date || '-' || campaign_key)"
+            description: primary key of the table
+            tests:
+              - unique
+              - not_null                                          
+
+      - name: facebook #Alias
+        identifier: raw_gz_facebook
+        description: facebook campaign
+        columns:
+          - name: "(date_date || '-' || campaign_key)"
+            description: primary key of the table
+            tests:
+              - unique
+              - not_null      
+
 models:
   - name: int_sales_margin #dbt path
     description: margin per product calculation #calculation
@@ -166,4 +207,88 @@ models:
         tests:
          - not_null    
 
+  - name: int_campaigns
+    description: merge campaigns
+    columns:
+      - name: "(date_date || '-' || campaign_key)"
+        description: primary key of the table
+        tests:
+          - unique
+          - not_null
+      - name: date_date
+        tests:
+          - not_null
+      - name: paid_source
+        tests:
+          - not_null
+      - name: campaign_key
+        tests:
+          - not_null
+      - name: campaign_name
+        tests:
+          - not_null
+      - name: ads_cost
+        tests:
+          - not_null
+      - name: impression
+        tests:
+          - not_null
+      - name: click
+        tests:
+          - not_null
 
+  - name: int_campaigns_day
+    description: Daily ads metrics
+    columns:
+      - name: date_date
+        description: primary key of the table
+        tests:
+          - unique
+          - not_null
+      - name: ads_cost
+        tests:
+          - not_null
+      - name: impression
+        tests:
+          - not_null
+      - name: click
+        tests:
+          - not_null   
+
+  - name: finance_campaigns_day
+    description: Finance Daily details with ads metrics
+    columns:
+      - name: date_date
+        description: primary key of the table
+        tests:
+          - unique
+          - not_null
+      - name: average_basket
+        tests:
+          - not_null
+      - name: operational_margin
+        tests:
+          - not_null
+      - name: total_qty_products_sold
+        tests:
+          - not_null   
+      - name: total_revenue
+        tests:
+          - not_null
+      - name: total_purchase_cost
+        tests:
+          - not_null
+      - name: margin
+        tests:
+          - not_null 
+      - name: shipping_fee
+        tests:
+          - not_null
+      - name: log_cost
+        tests:
+          - not_null
+      - name: ship_cost
+        tests:
+          - not_null    
+
+                        

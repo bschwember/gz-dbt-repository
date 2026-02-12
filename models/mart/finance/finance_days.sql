@@ -8,6 +8,7 @@ SELECT
     ,ROUND(SUM(shipping_fee),2) AS total_shipping_fees
     ,ROUND(SUM(logcost),2) AS total_logcost
     ,SUM(quantity) AS total_qty_products_sold
+    ,ROUND(SUM(ship_cost),2) AS ship_cost
 FROM {{ ref('int_orders_operational')}}
 GROUP BY
     date_date
